@@ -1,0 +1,96 @@
+<html>
+    <style>
+        #Title{
+            background-color: aqua;
+            color: red;
+            font-weight: 900;
+        }
+        
+        #Textarea{
+            height: 200px;
+            width: 400px;
+            font-weight: normal;
+        }
+        
+        h2{
+            color: grey
+        }
+        
+        .navbar{
+            background-color: red;
+            width: 100%;
+            height: 3vw;
+            overflow: hidden;
+        }
+        
+        .navbar a:hover{
+            background-color: green;
+            height: 25px;
+            overflow: hidden;
+        }
+        
+        .navbar a{
+            float: left;
+            padding: 6px 16px;
+            color: white;
+            font-family: sans-serif;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 1vw;
+        }
+        
+    </style>
+    
+    <nav>
+        <div class="navbar">
+            <div class="navHome">
+                <a href="index.html" id="navHome">Home</a>
+                
+                <a href="index.html" id="navNext">Next</a>
+            </div>
+        </div>
+    </nav>
+    
+    <h1 id="Title">Welcome To Simon's Rich Text Editor</h1>
+    
+    <h2>Rich Text Editor</h2>
+        
+    <div>
+        <Button onclick="richTextBold()">Bold</Button>
+        <Button onclick="richTextItalic()">Italic</Button>
+        <Button>Button</Button>
+        <Button>Button</Button>
+        <Button>Button</Button>
+    </div>
+    <div class="richTextArea">
+        <textarea id="Textarea">
+        
+        </textarea>
+    </div>
+    
+    <script>
+        
+        function richTextBold(){
+            var boldToggle = document.getElementById("Textarea").style.fontWeight
+           if(boldToggle != "bold"){ document.getElementById("Textarea").style.fontWeight="bold";
+                                   }
+            else{
+                document.getElementById("Textarea").style.fontWeight="normal"
+            }
+        }
+          
+        
+        function richTextItalic(){
+            var italicToggle = document.getElementById("Textarea").style.fontStyle
+            if(italicToggle != "italic"){
+                document.getElementById("Textarea").style.fontStyle="italic"
+            }
+            else{
+                document.getElementById("Textarea").style.fontStyle="normal"
+            }
+        }
+            
+    </script>
+    
+</html>
