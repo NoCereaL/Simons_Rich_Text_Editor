@@ -66,38 +66,155 @@
     <div>
         <Button onclick="richTextBold()" style="font-weight: bold">Bold</Button>
         <Button onclick="richTextItalic()" style="font-style: italic">Italic</Button>
-        <Button>Button</Button>
-        <Button>Button</Button>
-        <Button>Button</Button>
+        <Button onclick="richTextBoldSelected()">BoldSel</Button>
+        <Button onclick="UListToggle()">Uo-List</Button>
+        <Button onclick="OListToggle()">O-List</Button>
+        <Button onclick="detectLink()">Link</Button>
     </div>
     <div class="richTextArea">
         <textarea id="Textarea">
-        
         </textarea>
     </div>
     
+    <div style="float: left">
+        <p>Link: </p>
+        <a href="#" id="richTextLink">Link Here</a>
+    </div>
+    
     <script>
+        var toggleULists = new Boolean();
+        var toggleOLists = new Boolean(); 
         
+        //Bold text toggle function
         function richTextBold(){
-            var boldToggle = document.getElementById("Textarea").style.fontWeight
-           if(boldToggle != "bold"){ document.getElementById("Textarea").style.fontWeight="bold";
-                                   }
+            var boldToggle = document.getElementById("Textarea").style.fontWeight;
+           if(boldToggle != "bold"){
+               document.getElementById("Textarea").style.fontWeight="bold";
+            }
             else{
-                document.getElementById("Textarea").style.fontWeight="normal"
+                document.getElementById("Textarea").style.fontWeight="normal";
             }
         }
           
-        
+        //Italic text toggle function
         function richTextItalic(){
-            var italicToggle = document.getElementById("Textarea").style.fontStyle
+            var italicToggle = document.getElementById("Textarea").style.fontStyle;
             if(italicToggle != "italic"){
-                document.getElementById("Textarea").style.fontStyle="italic"
+                document.getElementById("Textarea").style.fontStyle="italic";
             }
             else{
-                document.getElementById("Textarea").style.fontStyle="normal"
+                document.getElementById("Textarea").style.fontStyle="normal";
             }
         }
+        
+        function richTextBoldSelected(){
+            var textarea = document.getElementById("Textarea");
+            var start = textarea.selectionStart;
+            var end = textarea.selectionEnd;
+            var selection = textarea.value.substring(start,end);
             
+            alert(selection)
+               
+        }
+        
+        //Unordered list toggle function
+        function UListToggle(){
+            if(toggleULists == false){
+                toggleULists = true;
+                toggleOLists = false;
+                alert("Unordered List: Enabled")
+            }
+            else{
+                toggleULists = false;
+                alert("Unordered List: Disabled")
+            }          
+        }
+        
+        //Orderd list toggle function
+        function OListToggle(){
+            if(toggleOLists == false){
+                toggleOLists = true;
+                toggleULists = false;
+                alert("Ordered List: Enabled")
+            }
+            else{
+                toggleOLists = false;
+                alert("Ordered List: Disabled")
+            }     
+        }
+        
+        //Rich text Unordered list function
+        function richTextUList(){
+            var textarea = document.getElementById("Textarea");
+            var row = document.getElementById("Textarea").value.split("\n");
+            var rows = document.getElementById("Textarea").value.split("\n").length;
+            //alert(row[2]);
+            textarea.value +=  " • ";
+            textarea.selectionEnd = textarea.selectionStart - 1;
+            
+            //textarea += "\n";
+            for(let i = 0; i < rows; i++){
+                
+            }
+        }
+        
+        //Rich text Orderd list function
+        function richTextOList(){
+            var textarea = document.getElementById("Textarea");
+            var row = document.getElementById("Textarea").value.split("\n");
+            var rows = document.getElementById("Textarea").value.split("\n").length;
+            //alert(row[2]);
+            textarea.value += " "+ rows +" ";
+            textarea.selectionEnd = textarea.selectionStart - 1;
+            
+            //textarea += "\n";
+            for(let i = 0; i < rows; i++){
+                
+            }
+        }
+        
+        function detectLink(){
+            var textarea = document.getElementById("Textarea");
+            var link = document.getElementById("richTextLink");
+            
+            var start = textarea.selectionStart;
+            var end = textarea.selectionEnd;
+            var selection = textarea.value.substring(start,end);
+            
+            alert("Please Highlight the link text to navigate to page");
+            if(textarea.value.includes("https") || textarea.value.includes("http")){
+                link.innerHTML = selection; 
+                link.href=selection;
+                
+            }
+            else{
+                link.innerHTML = "Please Highlight a valid link";
+                //link.href="#";
+            }
+        }
+                
+        //Enter Button Input Detector
+
+        document.onkeypress = function(evt) {
+            evt = evt || window.event;
+            var charCode = evt.keyCode || evt.which;
+            var charStr = String.fromCharCode(charCode);
+            //alert(charCode);
+            if(toggleULists == true){
+                if(charCode == 13){
+                    //alert(charCode);
+                    richTextUList();                
+                }
+            }
+            
+            if(toggleOLists == true){
+                if(charCode == 13){
+                    //alert(charCode);
+                    richTextOList();                
+                }
+            }
+                   
+        };    
     </script>
     
 </html>
